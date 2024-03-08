@@ -19,7 +19,6 @@ namespace SlimeApi
         }
         public Player[] GetPlayers()
         {
-            Players.Add(new Player() { Username = "xuy", UUID = new Guid() });
             return Players.ToArray();
         }
     }
