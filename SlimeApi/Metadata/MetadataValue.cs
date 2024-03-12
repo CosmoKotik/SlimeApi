@@ -16,6 +16,18 @@ namespace SlimeApi
         IsSwimming,
         IsInvisible,
         HasGlowingEffect,
-        IsFlyingWithAnElytra
+        IsFlyingWithAnElytra,
+
+        AirTicks,
+        CustomName,
+        IsCustomNameVisible,
+        IsSilent,
+        HasNoGravity,
+        Pose,
+
+        BlockDisplay,
+        Width,
+        Height,
+        Scale
     }
 }

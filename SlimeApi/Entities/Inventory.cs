@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace SlimeApi.Entity
+namespace SlimeApi.Entities
 {
     public class Inventory
     {

@@ -1,5 +1,5 @@
 ﻿using SlimeApi;
-using SlimeApi.Entity;
+using SlimeApi.Entities;
 using SlimeApi.Enums;
 using System;
 using System.Collections.Generic;
@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SlimeApi.Entity
+namespace SlimeApi.Entities
 {
-    public class Player
+    public class Player : Entity
     {
-        public int EntityID { get; set; }
+        //public int EntityID { get; set; }
         public string Username { get; set; }
         public bool IsHardcore { get; set; }
         public byte Gamemode { get; set; }
@@ -28,18 +28,18 @@ namespace SlimeApi.Entity
         public bool EnableTextFiltering { get; set; }
         public bool AllowServerListings { get; set; }
 
-        public bool IsOnGround { get; set; }
+        /*public bool IsOnGround { get; set; }
         public bool IsCrouching { get; set; }
         public bool IsSwimming { get; set; }
-        public bool IsSleeping { get; set; }
+        public bool IsSleeping { get; set; }*/
 
         public Metadata Metadata { get; set; }
 
-        public Guid UUID { get; set; }
+        /*public Guid UUID { get; set; }
 
         public Position CurrentPosition { get; set; }
         public Position PreviousPosition { get; set; }
-        public Position Size { get; set; } = new Position(0.7, 1.62, 0.7);
+        public Position Size { get; set; } = new Position(0.7, 1.62, 0.7);*/
 
         public Direction LookDirection { get; set; } = Direction.North;
         public Direction HalfDirection { get; set; } = Direction.Top;
@@ -58,8 +58,8 @@ namespace SlimeApi.Entity
             PreviousGamemode = 0xFF;
 
             Metadata = new Metadata();
-            Metadata.AddMetadata("IsCrouching", MetadataType.Byte, MetadataValue.IsStanding);
-            Metadata.AddMetadata("IsCrouchingPose", MetadataType.Pose, MetadataValue.IsStanding);
+            Metadata.AddMetadata("IsCrouching", MetadataType.Byte, MetadataValue.IsStanding, false);
+            Metadata.AddMetadata("IsCrouchingPose", MetadataType.Pose, MetadataValue.IsStanding, false);
 
             Inventory = new Inventory();
             Inventory.Add("crafting_output", 0, 0);
@@ -97,6 +97,11 @@ namespace SlimeApi.Entity
             };
         }
 
+        /*public void SetPosition(Position pos)
+        {
+            PluginEventHandler.AddEvent($"player.{UUID}.position", pos);
+        }*/
+
         public bool CheckIsColliding(Position position)
         {
             Position pos = CurrentPosition.XYZ.Clone();
@@ -128,6 +133,27 @@ namespace SlimeApi.Entity
                 return true;
 
             return false;
+        }
+
+        public NPC BuildNPC()
+        {
+            return new NPC()
+            {
+                CurrentHeldItem = this.CurrentHeldItem,
+                CurrentPosition = this.CurrentPosition,
+                EntityID = this.EntityID,
+                EntityType = this.EntityType,
+                IsCrouching = this.IsCrouching,
+                isNpc = true,
+                IsOnGround = this.IsOnGround,
+                UUID = this.UUID,
+                IsSleeping = this.IsSleeping,
+                Size = this.Size,
+                IsSwimming = this.IsSwimming,
+                MainHand = this.MainHand,
+                PreviousPosition = this.PreviousPosition,
+                Username = this.Username
+            };
         }
     }
 }
