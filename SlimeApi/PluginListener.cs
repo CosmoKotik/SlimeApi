@@ -42,7 +42,7 @@ namespace SlimeApi
                     Players.RemoveAll(x => x.EntityID == ((Player)arg1).EntityID);
                     break;
                 case PluginMethods.UpdatePlayer:
-                    int index = Players.FindIndex(x => x.UUID == ((Player)arg1).UUID);
+                    int index = Players.FindIndex(x => x.EntityID == ((Player)arg1).EntityID);
                     Players[index] = (Player)arg1;
                     break;
 
@@ -53,9 +53,13 @@ namespace SlimeApi
                     Entities.RemoveAll(x => x.EntityID == ((Entity)arg1).EntityID);
                     break;
                 case PluginMethods.UpdateEntity:
-                    index = Entities.FindIndex(x => x.UUID == ((Entity)arg1).UUID);
+                    index = Entities.FindIndex(x => x.EntityID == ((Entity)arg1).EntityID);
                     Entities[index] = (Entity)arg1;
                     break;
+                /*case PluginMethods.UpdateEntities:
+                    index = Entities.FindIndex(x => x.EntityID == ((Entity)arg1).EntityID);
+                    Entities[index] = (Entity)arg1;
+                    break;*/
 
                 case PluginMethods.AddNpc:
                     Npcs.Add((NPC)arg1);
@@ -64,7 +68,7 @@ namespace SlimeApi
                     Npcs.RemoveAll(x => x.EntityID == ((NPC)arg1).EntityID);
                     break;
                 case PluginMethods.UpdateNpc:
-                    index = Npcs.FindIndex(x => x.UUID == ((NPC)arg1).UUID);
+                    index = Npcs.FindIndex(x => x.EntityID == ((NPC)arg1).EntityID);
                     Npcs[index] = (NPC)arg1;
                     break;
 
@@ -148,6 +152,16 @@ namespace SlimeApi
         {
             PluginEventHandler.AddEvent("entity.destroy", entity.EntityID);
             return entity;
+        }
+
+        public Player? GetPlayer(string username)
+        {
+            return Players.Find(x => x.Username.Equals(username));
+        }
+
+        public Player? GetPlayer(Guid uuid)
+        {
+            return Players.Find(x => x.UUID.Equals(uuid));
         }
 
         public Player[] GetPlayers()

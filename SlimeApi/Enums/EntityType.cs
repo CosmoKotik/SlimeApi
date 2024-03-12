@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SlimeCore.Enums
+namespace SlimeApi.Enums
 {
     public enum EntityType
     {

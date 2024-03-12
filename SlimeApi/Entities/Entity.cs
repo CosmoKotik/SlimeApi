@@ -1,4 +1,4 @@
-﻿using SlimeCore.Enums;
+﻿using SlimeApi.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +78,8 @@ namespace SlimeApi.Entities
 
         public void SetPosition(Position pos)
         {
-            PluginEventHandler.AddEvent($"entity.setposition", pos);
+            this.CurrentPosition = pos;
+            PluginEventHandler.AddEvent($"entity.setposition", this);
         }
         public void SetVelocity(Position velocity)
         {

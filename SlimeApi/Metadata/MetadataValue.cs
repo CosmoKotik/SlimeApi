@@ -28,6 +28,7 @@ namespace SlimeApi
         BlockDisplay,
         Width,
         Height,
-        Scale
+        Scale,
+        Translation
     }
 }
