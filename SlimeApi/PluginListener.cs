@@ -141,9 +141,6 @@ namespace SlimeApi
 
         public Entity SpawnEntity(Entity entity)
         {
-            if (entity.Metadata == null)
-                entity.Metadata = new Metadata();
-
             PluginEventHandler.AddEvent("entity.spawn", entity);
             return entity;
         }

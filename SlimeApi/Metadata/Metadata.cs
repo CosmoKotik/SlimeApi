@@ -54,6 +54,13 @@ namespace SlimeApi
             return data;
         }
 
+        public Metadata UpdateMetadata(string name, object obj)
+        {
+            Metadata data = Meta.Find(x => x.Name.Equals(name));
+            data.MetaObj = obj;
+            return data;
+        }
+
         public Metadata UpdateMetadata(string name, MetadataType type, MetadataValue value)
         {
             Metadata data = Meta.Find(x => x.Name.Equals(name));

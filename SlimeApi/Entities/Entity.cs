@@ -12,6 +12,7 @@ namespace SlimeApi.Entities
         public int EntityID { get; set; }
         public Guid UUID { get; set; }
         public EntityType EntityType { get; set; }
+        public Position Velocity { get; set; }
         public Position CurrentPosition { get; set; }
         public Position PreviousPosition { get; set; }
         public Position Size { get; set; } = new Position(0.7, 1.62, 0.7);
@@ -31,6 +32,12 @@ namespace SlimeApi.Entities
         public Metadata Metadata { get; set; }
 
         public bool isNpc { get; set; } = false;
+
+        public Entity()
+        { 
+            Velocity = new Position(0, 0, 0);
+            Metadata = new Metadata();
+        }
 
         public Player BuildPlayer()
         {
@@ -71,7 +78,13 @@ namespace SlimeApi.Entities
 
         public void SetPosition(Position pos)
         {
-            PluginEventHandler.AddEvent($"entity.{EntityID}.setposition", pos);
+            PluginEventHandler.AddEvent($"entity.setposition", pos);
+        }
+        public void SetVelocity(Position velocity)
+        {
+            //PluginEventHandler.AddEvent($"entity.setvelocity", new object[] { this, velocity });
+            this.Velocity = velocity;
+            PluginEventHandler.AddEvent($"entity.setvelocity", this);
         }
     }
 }
